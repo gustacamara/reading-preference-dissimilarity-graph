@@ -10,5 +10,6 @@ public class Main {
         );
         dc.filter();
         dc.createPajekFile();
+
     }
 }
