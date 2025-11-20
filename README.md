@@ -4,7 +4,11 @@ Construction of high-density graphs using the knowledge acquired during the clas
 
 # Construction of High-Density Graphs
 **Requirements:**
+<<<<<<< HEAD
 - [x] Export a weighted and labeled file (Pajek format attached)
+=======
+- [ ] Export a weighted and labeled file (Pajek format attached)
+>>>>>>> ce0535c (Add README with project description and requirements)
 - [ ] Load a graph from a file
 - [ ] Function that checks if the graph is connected
 - [ ] Function that shows the graph components if it is disconnected (consider weakly connected components for directed graphs)
