@@ -8,5 +8,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         DatasetController dc = new DatasetController("./src/Data/Books_rating.csv", "./src/Data/Filtered/Books_rating_filtered.csv");
         dc.filter();
+        dc.createAdj();
     }
 }

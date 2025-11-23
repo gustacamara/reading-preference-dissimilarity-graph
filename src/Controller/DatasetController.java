@@ -5,6 +5,7 @@ import Model.Vertex;
 import java.io.*;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class DatasetController {
@@ -33,7 +34,6 @@ public class DatasetController {
 //            profileName = 4
 //            review/score = 6
 //            header.lenght() = 0-9
-            writer.write("UserID,BookID,BookTitle,Score\n");
             while((line = reader.readLine()) != null){
                 if(line.startsWith("Id,Title,Price")) continue;
                 fields = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
@@ -53,5 +53,22 @@ public class DatasetController {
         }
     }
 
+    public void createAdj() throws IOException {
+        BufferedReader bf = new BufferedReader(new FileReader(filteredPath));
+        HashMap<String, Double> users = new HashMap<>();
+        HashMap<String, String> books = new HashMap<>();
+        String line;
+        String[] fields;
+//        userID, BookId, bookTitle,score
+        while ((line = bf.readLine()) != null){
+            if(line.isEmpty()) continue;
+            fields = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+            if(fields.length < 3) continue;
+            Double score = Double.parseDouble(fields[3].trim());
+            users.merge(fields[0], score, Double::sum);
+            books.put(fields[2], fields[0]);
+        }
 
+
+    }
 }
