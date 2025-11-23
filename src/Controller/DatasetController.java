@@ -1,20 +1,18 @@
 package Controller;
 
 
-import Model.Vertex;
 import java.io.*;
-import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class DatasetController {
     private final String path;
     private final String filteredPath;
+    private final String pajekPath;
 
-    public DatasetController(String path, String filteredPath) {
+    public DatasetController(String path, String filteredPath, String pajekPath) {
         this.path = path;
         this.filteredPath = filteredPath;
+        this.pajekPath = pajekPath;
     }
 
     public void filter() throws IOException {
@@ -53,22 +51,82 @@ public class DatasetController {
         }
     }
 
-    public void createAdj() throws IOException {
+    public void createPajekFile() throws IOException {
+        if( new File(pajekPath).exists()) {
+            System.out.println("Pajek file already exists!");
+            return;
+        }
         BufferedReader bf = new BufferedReader(new FileReader(filteredPath));
-        HashMap<String, Double> users = new HashMap<>();
-        HashMap<String, String> books = new HashMap<>();
-        String line;
+        HashMap<String, HashMap<String, Double>> bookRatings = new HashMap<>();
+        String line, userJ, userI, edgeKey;
+        double ratingI, ratingJ, dissimilarity;
         String[] fields;
-//        userID, BookId, bookTitle,score
-        while ((line = bf.readLine()) != null){
-            if(line.isEmpty()) continue;
+        int idI, idJ;
+
+        // Read CSV: userID, BookId, bookTitle, score
+        while ((line = bf.readLine()) != null) {
+            if (line.isEmpty()) continue;
+
             fields = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-            if(fields.length < 3) continue;
+            if (fields.length < 4) continue;
+
+            String userId = fields[0].trim();
+            String bookTitle = fields[2].trim();
             Double score = Double.parseDouble(fields[3].trim());
-            users.merge(fields[0], score, Double::sum);
-            books.put(fields[2], fields[0]);
+
+            if (!bookRatings.containsKey(bookTitle)) {
+                bookRatings.put(bookTitle, new HashMap<>());
+            }
+            bookRatings.get(bookTitle).put(userId, score);
+        }
+        bf.close();
+        HashMap<String, Integer> userToId = new HashMap<>();
+        int userId = 1;
+
+        for (HashMap<String, Double> ratingsForBook : bookRatings.values()) {
+            for (String user : ratingsForBook.keySet()) {
+                if (!userToId.containsKey(user)) {
+                    userToId.put(user, userId++);
+                }
+            }
+        }
+        HashMap<String, Double> edges = new HashMap<>();
+
+        for (String book : bookRatings.keySet()) {
+            HashMap<String, Double> ratingsForBook = bookRatings.get(book);
+            ArrayList<String> usersList = new ArrayList<>(ratingsForBook.keySet());
+
+            for (int i = 0; i < usersList.size(); i++) {
+                for (int j = i + 1; j < usersList.size(); j++) {
+                    userI = usersList.get(i);
+                    userJ = usersList.get(j);
+                    ratingI = ratingsForBook.get(userI);
+                    ratingJ = ratingsForBook.get(userJ);
+                    dissimilarity = Math.abs(ratingI - ratingJ) / 2.0;
+                    idI = userToId.get(userI);
+                    idJ = userToId.get(userJ);
+                    edgeKey = Math.min(idI, idJ) + " " + Math.max(idI, idJ);
+
+                    edges.merge(edgeKey, dissimilarity, Double::sum);
+                }
+            }
         }
 
+        BufferedWriter writer = new BufferedWriter(new FileWriter(pajekPath));
 
+        writer.write("*Vertices " + userToId.size() + "\n");
+        for (Map.Entry<String, Integer> entry : userToId.entrySet()) {
+            writer.write(entry.getValue() + " \"" + entry.getKey() + "\"\n");
+        }
+
+        writer.write("*Edges\n");
+        for (Map.Entry<String, Double> entry : edges.entrySet()) {
+            writer.write(entry.getKey() + " " + entry.getValue() + "\n");
+        }
+
+        writer.close();
+        System.out.println("Pajek file created: dissimilarity_graph.net");
+        System.out.println("Total vertices: " + userToId.size());
+        System.out.println("Total edges: " + edges.size());
     }
 }
