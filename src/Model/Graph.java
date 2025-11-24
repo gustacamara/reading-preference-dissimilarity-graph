@@ -34,6 +34,34 @@ public class Graph {
         }
     }
 
+    public void setAdj(int origin, int target, int weight) {
+        if (origin < 0 || origin >= numberOfVertices || target < 0 || target >= numberOfVertices) {
+            return;
+        }
+
+        Vertex newVertex = new Vertex(target, weight);
+        if (vertices[origin] == null) {
+            vertices[origin] = newVertex;
+        } else {
+            Vertex current = vertices[origin];
+            while (current.getNext() != null) {
+                current = current.getNext();
+            }
+            current.setNext(newVertex);
+        }
+
+        Vertex newVertexReverse = new Vertex(origin, weight);
+        if (vertices[target] == null) {
+            vertices[target] = newVertexReverse;
+        } else {
+            Vertex current = vertices[target];
+            while (current.getNext() != null) {
+                current = current.getNext();
+            }
+            current.setNext(newVertexReverse);
+        }
+    }
+
     public void searchComponents(int start, List<Integer> components, List<Integer> visited) {
         visited.add(start);
         components.add(start);
@@ -352,6 +380,7 @@ public class Graph {
             }
             System.out.println();
         }
+        System.out.println(" ");
     }
 
 
