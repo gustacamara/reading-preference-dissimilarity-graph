@@ -7,6 +7,8 @@ public class GraphController {
         boolean isConnected = graph.isConnected();
         boolean isEulerian = graph.isEulerian();
 
+        graph.printGraph();
+
         if (isConnected) {
             System.out.println("The graph is connected!");
         } else {

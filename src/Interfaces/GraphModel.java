@@ -8,6 +8,7 @@ import java.util.Map;
 public interface GraphModel {
     public void setVertices(Vertex[] vertices);
     public void setLabels(String[] labels);
+    void setAdj(int origin, int target, int weight);
     void searchComponents(int start, List<Integer> components, List<Integer> visited);
     int components();
     boolean isConnected();
