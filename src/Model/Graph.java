@@ -349,8 +349,9 @@ public class Graph {
 
         for (int j = 0; j < numberOfVertices; j++) {
             if (vertices[j] != null) {
+                double value = betwenness[j] / 2;
 
-                double calc = 2 * (betwenness[j] / ((numberOfVertices - 1) * (numberOfVertices - 2)));
+                double calc = 2 * (value / ((numberOfVertices - 1) * (numberOfVertices - 2)));
 
                 mapBetwennes.put(j,calc);
 
