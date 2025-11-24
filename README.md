@@ -6,12 +6,12 @@ Construction of high-density graphs using the knowledge acquired during the clas
 **Requirements:**
 - [x] Export a weighted and labeled file (Pajek format attached)
 - [ ] Load a graph from a file
-- [ ] Function that checks if the graph is connected
-- [ ] Function that shows the graph components if it is disconnected (consider weakly connected components for directed graphs)
-- [ ] Function that checks if the graph is Eulerian or not
-- [ ] Function that checks if the graph is Cyclic or not
-- [ ] Function that calculates the Closeness Centrality of each node (consider the shortest-path distance)
-- [ ] Function that calculates the Betweenness Centrality of each node (consider the shortest-path distance)
+- [x] Function that checks if the graph is connected
+- [x] Function that shows the graph components if it is disconnected (consider weakly connected components for directed graphs)
+- [x] Function that checks if the graph is Eulerian or not
+- [x] Function that checks if the graph is Cyclic or not
+- [x] Function that calculates the Closeness Centrality of each node (consider the shortest-path distance)
+- [x] Function that calculates the Betweenness Centrality of each node (consider the shortest-path distance)
 - [ ] Random graph generator
 	- N nodes
 	- N edges
