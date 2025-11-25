@@ -12,7 +12,7 @@ Construction of high-density graphs using the knowledge acquired during the clas
 - [x] Function that checks if the graph is Cyclic or not
 - [x] Function that calculates the Closeness Centrality of each node (consider the shortest-path distance)
 - [x] Function that calculates the Betweenness Centrality of each node (consider the shortest-path distance)
-- [ ] Random graph generator
+- [x] Random graph generator
 	- N nodes
 	- N edges
 	- Connected or not

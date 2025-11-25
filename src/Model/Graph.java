@@ -293,8 +293,10 @@ public class Graph {
 
 
         for(int i = 0; i < numberOfVertices; i++) {
-            if (i != start && distances[i] != Double.POSITIVE_INFINITY) {
-                sum += distances[i];
+            if (i != start){
+                if (distances[i] != Double.POSITIVE_INFINITY) {
+                    sum += distances[i];
+                }
             }
         }
 
@@ -319,9 +321,9 @@ public class Graph {
 
         mapCloseness.entrySet().stream()
                 .sorted(Map.Entry.<Integer, Double>comparingByValue().reversed())
-                .limit(20)
+                .limit(100)
                 .forEach(entry ->
-                        System.out.printf("Vertex closeness %s: %.4f\n", labels[entry.getKey()], entry.getValue()));
+                        System.out.printf("Vertex closeness %s: %f\n", labels[entry.getKey()], entry.getValue()));
 
         System.out.println(" ");
     }
@@ -372,9 +374,9 @@ public class Graph {
 
         mapBetwennes.entrySet().stream()
                 .sorted(Map.Entry.<Integer, Double>comparingByValue().reversed())
-                .limit(20)
+                .limit(100)
                 .forEach(entry ->
-                        System.out.printf("Vertex betweenness %s: %.4f\n", labels[entry.getKey()], entry.getValue()));
+                        System.out.printf("Vertex betweenness %s: %f\n", labels[entry.getKey()], entry.getValue()));
 
         System.out.println(" ");
     }
