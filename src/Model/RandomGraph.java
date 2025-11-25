@@ -49,13 +49,13 @@ public class RandomGraph {
         }
     }
 
-    public Graph generateWeightedGraph (int numVertices, int numEdges, String[] splitLabels, String[] splitWeights) {
+    public Graph generateWeightedGraph (int numVertices, int numEdges, String[] splitWeights) {
         Graph randomGraph = new Graph(numVertices);
 
         int[] listWeight = new int[splitWeights.length];
 
-        for (int l = 0; l < splitLabels.length; l ++) {
-            randomGraph.setLabels(l, splitLabels[l]);
+        for (int l = 0; l < numVertices; l ++) {
+            randomGraph.setLabels(l, String.valueOf(l +1));
         }
 
         for (int w = 0; w < splitWeights.length; w++) {
@@ -67,11 +67,11 @@ public class RandomGraph {
         return randomGraph;
     }
 
-    public Graph generateUnweightedGraph (int numVertices, int numEdges, String[] splitLabels) {
+    public Graph generateUnweightedGraph (int numVertices, int numEdges) {
         Graph randomGraph = new Graph(numVertices);
 
-        for (int l = 0; l < splitLabels.length; l ++) {
-            randomGraph.setLabels(l, splitLabels[l]);
+        for (int l = 0; l < numVertices; l ++) {
+            randomGraph.setLabels(l, String.valueOf(l +1));
         }
 
         generateUnweightedEdges(randomGraph, numVertices, numEdges);
@@ -79,14 +79,14 @@ public class RandomGraph {
         return randomGraph;
     }
 
-    public Graph connectedWeightedGraph (int numVertices, int numEdges, String[] splitLabels, String[] splitWeights) {
+    public Graph connectedWeightedGraph (int numVertices, int numEdges, String[] splitWeights) {
         Graph connectedGraph = new Graph(numVertices);
         Random rand = new Random();
 
         int[] listWeight = new int[splitWeights.length];
 
-        for (int l = 0; l < splitLabels.length; l ++) {
-            connectedGraph.setLabels(l, splitLabels[l]);
+        for (int l = 0; l < numVertices; l ++) {
+            connectedGraph.setLabels(l, String.valueOf(l +1));
         }
 
         for (int w = 0; w < splitWeights.length; w++) {
@@ -108,13 +108,13 @@ public class RandomGraph {
         return connectedGraph;
     }
 
-    public Graph connectedUnweightedGraph (int numVertices, int numEdges, String[] splitLabels) {
+    public Graph connectedUnweightedGraph (int numVertices, int numEdges) {
         Graph connectedGraph = new Graph(numVertices);
         Random rand = new Random();
 
 
-        for (int l = 0; l < splitLabels.length; l ++) {
-            connectedGraph.setLabels(l, splitLabels[l]);
+        for (int l = 0; l < numVertices; l ++) {
+            connectedGraph.setLabels(l, String.valueOf(l +1));
         }
 
 

@@ -1,6 +1,8 @@
 import Controller.DatasetController;
 import Controller.GraphController;
+import Controller.RandomGraphController;
 import Model.Graph;
+import Model.RandomGraph;
 import java.io.IOException;
 
 public class Main {
@@ -21,6 +23,8 @@ public class Main {
         }
 
         GraphController graphController = new GraphController();
+        RandomGraphController randomGraphController = new RandomGraphController();
+        RandomGraph randomGraph = new RandomGraph();
 
 
         graph.setAdj(0, 1, 5);
@@ -42,5 +46,7 @@ public class Main {
 
 
         graphController.graph(graph);
+
+        randomGraphController.randomGraph(randomGraph);
     }
 }
