@@ -3,13 +3,13 @@ package Model;
 public class Vertex {
     private int id;
     private Vertex next;
-    private int weight;
+    private double weight;
 
     public Vertex(int weight) {
         this.weight = weight;
     }
 
-    public Vertex(int id, int weight) {
+    public Vertex(int id, double weight) {
         this.id = id;
         this.weight = weight;
     }
@@ -30,7 +30,7 @@ public class Vertex {
         this.next = next;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
