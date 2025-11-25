@@ -49,4 +49,3 @@ public class Main {
 
         randomGraphController.randomGraph(randomGraph);
     }
-}

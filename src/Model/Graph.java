@@ -34,7 +34,7 @@ public class Graph {
         }
     }
 
-    public void setAdj(int origin, int target, int weight) {
+    public void setAdj(int origin, int target, double weight) {
         if (origin < 0 || origin >= numberOfVertices || target < 0 || target >= numberOfVertices) {
             return;
         }
@@ -262,7 +262,7 @@ public class Graph {
 
             while (actual != null) {
                 int adj = actual.getId();
-                int weight = actual.getWeight();
+                double weight = actual.getWeight();
 
                 if (!permanentDistance[adj]) {
                     newDistance = distance[currentVertex] + weight;
