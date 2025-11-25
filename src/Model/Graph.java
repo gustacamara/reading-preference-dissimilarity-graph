@@ -62,6 +62,18 @@ public class Graph {
         }
     }
 
+    public boolean existEdge(int start, int target) {
+        Vertex current = vertices[start];
+        while (current != null) {
+            if (current.getId() == target) {
+                return true;
+            };
+
+            current = current.getNext();
+        }
+        return false;
+    }
+
     public void searchComponents(int start, List<Integer> components, List<Integer> visited) {
         visited.add(start);
         components.add(start);
@@ -374,6 +386,23 @@ public class Graph {
 
             while (actual != null) {
                 System.out.print(labels[actual.getId()] + "(" + actual.getWeight() + ")");
+                actual = actual.getNext();
+                if (actual != null) {
+                    System.out.print(" -> ");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println(" ");
+    }
+
+    public void printWeightedGraph() {
+        for (int i = 0; i < numberOfVertices; i++) {
+            System.out.print(labels[i] + " -> ");
+            Vertex actual = vertices[i];
+
+            while (actual != null) {
+                System.out.print(labels[actual.getId()]);
                 actual = actual.getNext();
                 if (actual != null) {
                     System.out.print(" -> ");
