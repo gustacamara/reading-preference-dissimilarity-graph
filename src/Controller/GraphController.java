@@ -2,20 +2,15 @@ package Controller;
 
 import Model.Graph;
 import Model.Triple;
-import Model.Vertex;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class GraphController {
     public void graph(Graph graph) {
         boolean isConnected = graph.isConnected();
         boolean isEulerian = graph.isEulerian();
-
-        graph.printGraph();
 
         if (isConnected) {
             System.out.println("The graph is connected!");
@@ -30,6 +25,7 @@ public class GraphController {
         }
 
         graph.isCyclic();
+        graph.components();
 
         graph.betweennessCentrality();
         graph.closenessCentrality();
