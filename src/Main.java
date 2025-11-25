@@ -14,7 +14,11 @@ public class Main {
         );
         dc.filter();
         dc.createPajekFile();
-
+        System.out.println("""
+                Students : {\s
+                \tLuis Gustavo Câmara Martins
+                \tCarlos Eduardo Nogueira Morciani
+                }""");
 
 
         GraphController graphController = new GraphController();
