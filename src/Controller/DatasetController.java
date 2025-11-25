@@ -24,6 +24,7 @@ public class DatasetController {
         FileWriter writer = new FileWriter(filteredPath);
         String line, filteredLine;
         String[] fields;
+        int nodeLimit = 7_000;
         try {
 //            id = 0
 //            Title = 1
@@ -32,6 +33,8 @@ public class DatasetController {
 //            review/score = 6
 //            header.lenght() = 0-9
             while((line = reader.readLine()) != null){
+                nodeLimit--;
+                if (nodeLimit == 0) break;
                 if(line.startsWith("Id,Title,Price")) continue;
                 fields = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
                 if(fields[3] == null) continue;
