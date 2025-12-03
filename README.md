@@ -1,5 +1,4 @@
 # Description
-**Date:** 11/25/25  
 Construction of high-density graphs using the knowledge acquired during the classes
 
 # Construction of High-Density Graphs
